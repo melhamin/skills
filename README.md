@@ -13,7 +13,7 @@ npx skills@latest add melhamin/skills
 Install a single skill:
 
 ```bash
-npx skills@latest add melhamin/skills/commit-with-conventional-message
+npx skills@latest add melhamin/skills/parse-dont-validate
 ```
 
 The CLI fetches skills from this GitHub repo and installs them into your
@@ -23,8 +23,7 @@ agent's skills directory (e.g. `.claude/skills/`), symlinked by default.
 
 | Skill | Description |
 | --- | --- |
-| [`commit-with-conventional-message`](skills/commit-with-conventional-message/SKILL.md) | Commit staged changes with a Conventional Commits message. |
-| [`example-skill`](skills/example-skill/SKILL.md) | Template to copy when creating a new skill. |
+| [`parse-dont-validate`](skills/parse-dont-validate/SKILL.md) | Parse, don't validate — design types/schemas at boundaries so a check keeps its proof in the return type. |
 
 ## Adding a skill
 
