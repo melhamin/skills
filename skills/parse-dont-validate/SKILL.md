@@ -1,6 +1,6 @@
 ---
 name: parse-dont-validate
-description: Parse, don't validate — use when designing types or schemas for data crossing a boundary (API input, JSON, env vars, user input), when writing validation or input-checking logic, or when reviewing code that re-checks data already checked elsewhere.
+description: Parse, don't validate — use when designing types or schemas for data crossing a boundary (API input, JSON, env vars, user input), when writing validation logic, or when reviewing code that re-checks data already checked elsewhere.
 ---
 
 # Parse, Don't Validate
@@ -21,8 +21,8 @@ Apply these to every point where code accepts data it did not construct:
 1. **Make illegal states unrepresentable.** Choose the most precise type the data admits; when the current encoding can't express a property you rely on, refactor the type rather than guarding around it.
 2. **Push the proof to the boundary — but no further.** Convert raw input to the refined representation at the edge (route handler, form submit, config load), before any logic touches it. Core code then takes the refined type as its argument: written against the representation you wish you had, total over its input.
 3. **Let datatypes inform code.** Reach for a discriminated union where control flow follows the data's shape; a bag of boolean flags on a record is the signal to do so.
-4. **Treat proof-discarding checks with suspicion.** A function that only checks and returns `void`/`boolean` is a validator; return the refined type instead, or a type predicate (`xs is NonEmpty<T>`) at minimum.
-5. **Multiple passes are fine.** Stratification means *parse, then execute* — it permits context-sensitive parsing where one part of the input guides parsing the rest.
+4. **Return the proof.** A check that returns `void`/`boolean` discards it; return the refined type, or a type predicate (`xs is NonEmpty<T>`) at minimum.
+5. **Multiple passes are fine.** Stratified parsing permits context-sensitive parsing, where one part of the input guides parsing the rest.
 6. **Normalize.** Duplicated or denormalized data makes the illegal state "these two copies disagree" trivially representable; where denormalization is required, seal it behind an abstraction boundary that maintains the invariant.
 7. **Smart constructors when types run out.** For properties the type system can't express structurally (an int in range, a valid email), use a branded/opaque type whose only constructor is the parser — the validator now *looks like* a parser from the outside.
 
